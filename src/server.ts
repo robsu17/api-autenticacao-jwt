@@ -1,8 +1,9 @@
 import { app } from "./app";
+import { environment } from "./env";
 
 app
   .listen({
-    port: 3333,
+    port: environment.PORT,
   })
   .then(() => {
     console.log("🚀 HTTP Server Running");

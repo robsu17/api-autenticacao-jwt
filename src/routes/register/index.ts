@@ -3,6 +3,7 @@ import z from "zod";
 import { prisma } from "../../prisma/prisma";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { environment } from "../../env";
 
 export async function register(request: FastifyRequest, reply: FastifyReply) {
   const bodySchema = z.object({
@@ -49,7 +50,7 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
 
     const token = jwt.sign(
       { nome: user.nome, email: user.email, telefones: user.telefones },
-      "supersecret",
+      environment.SECRET_KEY,
       { expiresIn: 60 * 30 },
     );
 

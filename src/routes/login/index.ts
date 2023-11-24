@@ -3,6 +3,7 @@ import z from "zod";
 import { prisma } from "../../prisma/prisma";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { environment } from "../../env";
 
 export default async function login(
   request: FastifyRequest,
@@ -47,7 +48,7 @@ export default async function login(
 
         token = jwt.sign(
           { nome: user.nome, email: user.email, telefones },
-          "supersecret",
+          environment.SECRET_KEY,
           { expiresIn: 60 * 30 },
         );
       } else {
