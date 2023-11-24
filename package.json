@@ -4,7 +4,9 @@
   "description": "",
   "type": "module",
   "scripts": {
+    "start": "node build/server.cjs",
     "dev": "tsx watch src/server.ts",
+    "build": "tsup src --out-dir build",
     "lint": "eslint src --ext .ts",
     "test": "vitest",
     "test-ui": "vitest --ui"
@@ -28,6 +30,7 @@
     "@vitest/ui": "^0.34.6",
     "eslint": "^8.54.0",
     "prisma": "^5.6.0",
+    "tsup": "^8.0.1",
     "tsx": "^4.4.0",
     "typescript": "^5.3.2",
     "vitest": "^0.34.6"
