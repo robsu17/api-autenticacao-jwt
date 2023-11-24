@@ -4,6 +4,7 @@ import { prisma } from "../../prisma/prisma";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { environment } from "../../env";
+import { dateTimeFormatter } from "../../utils/dateformatter";
 
 export async function register(request: FastifyRequest, reply: FastifyReply) {
   const bodySchema = z.object({
@@ -56,9 +57,9 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
 
     reply.status(201).send({
       id: user.id,
-      data_criacao: user.data_criacao,
-      data_atualizacao: user.data_atualizacao,
-      ultimo_atualizacao: user.ultimo_login,
+      data_criacao: dateTimeFormatter.format(user.data_criacao),
+      data_atualizacao: dateTimeFormatter.format(user.data_atualizacao),
+      ultimo_atualizacao: dateTimeFormatter.format(user.ultimo_login),
       token,
     });
   } catch (err) {

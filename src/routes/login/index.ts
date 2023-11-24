@@ -4,6 +4,7 @@ import { prisma } from "../../prisma/prisma";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { environment } from "../../env";
+import { dateTimeFormatter } from "../../utils/dateformatter";
 
 export default async function login(
   request: FastifyRequest,
@@ -49,7 +50,7 @@ export default async function login(
         token = jwt.sign(
           { nome: user.nome, email: user.email, telefones },
           environment.SECRET_KEY,
-          { expiresIn: 60 * 30 },
+          { expiresIn: 30 },
         );
       } else {
         reply.status(401).send({ mensagem: "Usuário e/ou senha inválidos" });
@@ -58,9 +59,9 @@ export default async function login(
 
     reply.status(200).send({
       id: user?.id,
-      data_criacao: user?.data_criacao,
-      data_atualizacao: user?.data_atualizacao,
-      ultimo_login: user?.ultimo_login,
+      data_criacao: dateTimeFormatter.format(user?.data_criacao),
+      data_atualizacao: dateTimeFormatter.format(user?.data_atualizacao),
+      ultimo_login: dateTimeFormatter.format(user?.ultimo_login),
       token,
     });
   } catch (err) {
