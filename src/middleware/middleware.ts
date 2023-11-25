@@ -14,10 +14,9 @@ export default async function authenticate(
   try {
     if (token) {
       const authToken = token?.split(" ");
-      const decoded = jwt.verify(authToken[1], "supersecret");
-      request.user = decoded;
+      jwt.verify(authToken[1], "supersecret");
     }
-  } catch (err) {
+  } catch (err: any) {
     if (err.message === "jwt expired") {
       reply.status(401).send({ mensagem: "Sessão inválida" });
     }

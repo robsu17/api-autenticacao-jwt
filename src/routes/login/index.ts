@@ -50,7 +50,7 @@ export default async function login(
         token = jwt.sign(
           { nome: user.nome, email: user.email, telefones },
           environment.SECRET_KEY,
-          { expiresIn: 30 },
+          { expiresIn: 30 * 60 },
         );
       } else {
         reply.status(401).send({ mensagem: "Usuário e/ou senha inválidos" });

@@ -1,9 +1,16 @@
 import { FastifyReply, FastifyRequest } from "fastify";
+import jwt from "jsonwebtoken";
+import { environment } from "../../env";
 
 export default async function user(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  const decoded = request.user;
-  reply.status(200).send({ user: decoded });
+  const token = request.headers.authorization;
+  let decoded;
+  if (token) {
+    const authToken = token?.split(" ");
+    decoded = jwt.decode(authToken[1]);
+  }
+  reply.status(200).send(decoded);
 }
