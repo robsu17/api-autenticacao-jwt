@@ -1,4 +1,4 @@
-import { env } from "node:process";
+import "dotenv/config";
 import { z } from "zod";
 
 const envSchema = z.object({
@@ -7,7 +7,7 @@ const envSchema = z.object({
   SECRET_KEY: z.string(),
 });
 
-const _env = envSchema.safeParse(env);
+const _env = envSchema.safeParse(process.env);
 
 if (_env.success === false) {
   console.error("⚠️ A invalide environment variables!", _env.error.format());
