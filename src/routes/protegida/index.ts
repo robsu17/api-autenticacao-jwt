@@ -1,6 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import jwt from "jsonwebtoken";
-import { environment } from "../../env";
 
 export default async function user(
   request: FastifyRequest,
