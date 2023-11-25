@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node build/server.cjs",
     "dev": "tsx watch src/server.ts",
-    "build": "tsup src --out-dir build",
+    "build": "npx tsc",
     "lint": "eslint src --ext .ts",
     "test": "vitest",
     "test-ui": "vitest --ui"
