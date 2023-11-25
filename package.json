@@ -4,9 +4,9 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "start": "node build/server.js",
+    "start": "node build/server.cjs",
     "dev": "tsx watch src/server.ts",
-    "build": "npx tsc",
+    "build": "tsup src --out-dir build",
     "lint": "eslint src --ext .ts",
     "test": "vitest",
     "test-ui": "vitest --ui"
